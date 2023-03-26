@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<PackageId>Virenbar.Lanyard</PackageId>
+		<TargetFrameworks>net6.0;net452</TargetFrameworks>
+		<Description>Library for pochta.ru API</Description>
+		<Authors>Virenbar</Authors>
+		<Copyright>Virenbar</Copyright>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/Virenbar/Lanyard</RepositoryUrl>
+		<PackageIcon>Lanyard.png</PackageIcon>
+		<PackageIconUrl>https://raw.githubusercontent.com/Virenbar/Lanyard/master/Lanyard/Icon/Lanyard.png</PackageIconUrl>
+		<PackageProjectUrl>https://github.com/Virenbar/Lanyard</PackageProjectUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<LangVersion>10.0</LangVersion>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>embedded</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+	</ItemGroup>
+	
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+		<Reference Include="System.Net.Http" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="Icon\Lanyard.png" Pack="true" PackagePath="" />
+	</ItemGroup>
+	
+</Project>
