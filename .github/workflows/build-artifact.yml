@@ -1,0 +1,56 @@
+name: Build Artifact
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_call:
+    outputs:
+      version:
+        description: "Version builded"
+        value: ${{ jobs.build.outputs.version }}
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    env:
+      DOTNET_NOLOGO: true
+    outputs:
+      version: ${{steps.version.outputs.version}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.x
+
+      - name: Set VERSION
+        id: version
+        run: .\.github\scripts\version.ps1
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Build solution
+        run: |
+          dotnet restore --locked-mode
+          dotnet build -c Release
+
+      - name: Pack NuGet
+        run: dotnet pack .\Lanyard\Lanyard.csproj -c Release /p:Version=$env:VERSION --include-symbols
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Lanyard
+          path: "**\*.nupkg"
+          if-no-files-found: error

@@ -1,0 +1,29 @@
+name: Publish Artifact
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build
+    uses: ./.github/workflows/build-artifact.yml@master
+
+  publish:
+    name: Publish
+    runs-on: windows-latest
+    needs: build
+    steps:
+      - name: Install .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.x
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+
+      - name: List files
+        run: ls -R
+
+      - name: Push - NuGet
+        run: dotnet nuget push **\*.nupkg -s 'https://api.nuget.org/v3/index.json' -k ${{secrets.NUGETKEY}} --skip-duplicate
+
+      - name: Push - GitHub
+        run: dotnet nuget push **\*.nupkg -s 'https://nuget.pkg.github.com/Virenbar/index.json' -k ${{secrets.GITHUB_TOKEN}} --skip-duplicate

@@ -36,28 +36,29 @@
             label2 = new Label();
             B_User = new Button();
             panel1 = new Panel();
-            flowLayoutPanel1 = new FlowLayoutPanel();
-            B_DeleteKey = new Button();
             groupBox1 = new GroupBox();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            B_SetKey = new Button();
+            B_DeleteKey = new Button();
+            B_Patch = new Button();
             tableLayoutPanel3 = new TableLayoutPanel();
             label5 = new Label();
             TB_KVValue = new TextBox();
             label6 = new Label();
             TB_KVKey = new TextBox();
-            B_SetKey = new Button();
             groupBox2 = new GroupBox();
+            flowLayoutPanel2 = new FlowLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             label3 = new Label();
             textBox1 = new TextBox();
-            flowLayoutPanel2 = new FlowLayoutPanel();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
             groupBox1.SuspendLayout();
+            flowLayoutPanel1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             groupBox2.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
             flowLayoutPanel2.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
             // 
             // PG_Data
@@ -148,22 +149,50 @@
             panel1.Size = new Size(333, 450);
             panel1.TabIndex = 5;
             // 
+            // groupBox1
+            // 
+            groupBox1.AutoSize = true;
+            groupBox1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            groupBox1.Controls.Add(flowLayoutPanel1);
+            groupBox1.Controls.Add(tableLayoutPanel3);
+            groupBox1.Dock = DockStyle.Top;
+            groupBox1.Location = new Point(0, 145);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(333, 142);
+            groupBox1.TabIndex = 6;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "KV Storage";
+            // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoSize = true;
             flowLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             flowLayoutPanel1.Controls.Add(B_SetKey);
             flowLayoutPanel1.Controls.Add(B_DeleteKey);
+            flowLayoutPanel1.Controls.Add(B_Patch);
             flowLayoutPanel1.Dock = DockStyle.Top;
             flowLayoutPanel1.Location = new Point(3, 77);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(327, 31);
+            flowLayoutPanel1.Size = new Size(327, 62);
             flowLayoutPanel1.TabIndex = 8;
+            // 
+            // B_SetKey
+            // 
+            B_SetKey.AutoSize = true;
+            B_SetKey.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            B_SetKey.Location = new Point(3, 3);
+            B_SetKey.Name = "B_SetKey";
+            B_SetKey.Size = new Size(54, 25);
+            B_SetKey.TabIndex = 4;
+            B_SetKey.Text = "Set key";
+            B_SetKey.UseVisualStyleBackColor = true;
+            B_SetKey.Click += B_SetKey_Click;
             // 
             // B_DeleteKey
             // 
             B_DeleteKey.AutoSize = true;
             B_DeleteKey.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            flowLayoutPanel1.SetFlowBreak(B_DeleteKey, true);
             B_DeleteKey.Location = new Point(63, 3);
             B_DeleteKey.Name = "B_DeleteKey";
             B_DeleteKey.Size = new Size(71, 25);
@@ -172,17 +201,17 @@
             B_DeleteKey.UseVisualStyleBackColor = true;
             B_DeleteKey.Click += B_DeleteKey_Click;
             // 
-            // groupBox1
+            // B_Patch
             // 
-            groupBox1.Controls.Add(flowLayoutPanel1);
-            groupBox1.Controls.Add(tableLayoutPanel3);
-            groupBox1.Dock = DockStyle.Top;
-            groupBox1.Location = new Point(0, 145);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(333, 149);
-            groupBox1.TabIndex = 6;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "KV Storage";
+            B_Patch.AutoSize = true;
+            B_Patch.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            B_Patch.Location = new Point(3, 34);
+            B_Patch.Name = "B_Patch";
+            B_Patch.Size = new Size(68, 25);
+            B_Patch.TabIndex = 4;
+            B_Patch.Text = "Patch key";
+            B_Patch.UseVisualStyleBackColor = true;
+            B_Patch.Click += B_Patch_Click;
             // 
             // tableLayoutPanel3
             // 
@@ -241,18 +270,6 @@
             TB_KVKey.Size = new Size(280, 23);
             TB_KVKey.TabIndex = 1;
             // 
-            // B_SetKey
-            // 
-            B_SetKey.AutoSize = true;
-            B_SetKey.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            B_SetKey.Location = new Point(3, 3);
-            B_SetKey.Name = "B_SetKey";
-            B_SetKey.Size = new Size(54, 25);
-            B_SetKey.TabIndex = 4;
-            B_SetKey.Text = "Set key";
-            B_SetKey.UseVisualStyleBackColor = true;
-            B_SetKey.Click += B_SetKey_Click;
-            // 
             // groupBox2
             // 
             groupBox2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -265,6 +282,17 @@
             groupBox2.TabIndex = 7;
             groupBox2.TabStop = false;
             groupBox2.Text = "Lanyard";
+            // 
+            // flowLayoutPanel2
+            // 
+            flowLayoutPanel2.AutoSize = true;
+            flowLayoutPanel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            flowLayoutPanel2.Controls.Add(B_User);
+            flowLayoutPanel2.Dock = DockStyle.Top;
+            flowLayoutPanel2.Location = new Point(3, 77);
+            flowLayoutPanel2.Name = "flowLayoutPanel2";
+            flowLayoutPanel2.Size = new Size(327, 31);
+            flowLayoutPanel2.TabIndex = 5;
             // 
             // tableLayoutPanel2
             // 
@@ -299,17 +327,6 @@
             textBox1.Size = new Size(144, 23);
             textBox1.TabIndex = 1;
             // 
-            // flowLayoutPanel2
-            // 
-            flowLayoutPanel2.AutoSize = true;
-            flowLayoutPanel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            flowLayoutPanel2.Controls.Add(B_User);
-            flowLayoutPanel2.Dock = DockStyle.Top;
-            flowLayoutPanel2.Location = new Point(3, 77);
-            flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(327, 31);
-            flowLayoutPanel2.TabIndex = 5;
-            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -318,23 +335,24 @@
             Controls.Add(PG_Data);
             Controls.Add(panel1);
             Name = "FormMain";
-            Text = "Form1";
+            Text = "Lanyard test form";
             Load += FormMain_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             panel1.ResumeLayout(false);
-            flowLayoutPanel1.ResumeLayout(false);
-            flowLayoutPanel1.PerformLayout();
+            panel1.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            flowLayoutPanel1.ResumeLayout(false);
+            flowLayoutPanel1.PerformLayout();
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel3.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            tableLayoutPanel2.ResumeLayout(false);
-            tableLayoutPanel2.PerformLayout();
             flowLayoutPanel2.ResumeLayout(false);
             flowLayoutPanel2.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -362,5 +380,6 @@
         private TextBox textBox1;
         private FlowLayoutPanel flowLayoutPanel1;
         private FlowLayoutPanel flowLayoutPanel2;
+        private Button B_Patch;
     }
 }

@@ -20,6 +20,15 @@ namespace Lanyard.WF
             await KV.DeleteKey(TB_KVKey.Text);
         }
 
+        private async void B_Patch_Click(object sender, EventArgs e)
+        {
+            using var KV = new KVClient(Settings.Default.UserID, Settings.Default.APIKey);
+            var D = new Dictionary<string, string>() {
+                { TB_KVKey.Text, TB_KVValue.Text }
+            };
+            await KV.SetKeys(D);
+        }
+
         private async void B_SetKey_Click(object sender, EventArgs e)
         {
             using var KV = new KVClient(Settings.Default.UserID, Settings.Default.APIKey);
@@ -28,14 +37,11 @@ namespace Lanyard.WF
 
         private async void B_User_Click(object sender, EventArgs e)
         {
-            if (!long.TryParse(Settings.Default.UserID, out var ID)) { return; }
-            var Responce = await Client.User(ID);
-
+            var Responce = await Client.User(Settings.Default.UserID);
             PG_Data.SelectedObject = Responce.Data;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
-        {
-        }
+        { }
     }
 }

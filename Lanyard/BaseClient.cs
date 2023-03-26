@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -40,14 +39,6 @@ namespace Lanyard
 
         protected Task<T> Get<T>(string path) => Request<T>(path, null, HttpMethod.Get);
 
-        //protected async Task<T> Get<T>(string path)
-        //{
-        //    using var Request = new HttpRequestMessage(HttpMethod.Get, path);
-        //    using var Responce = await Client.SendAsync(Request).ConfigureAwait(false);
-        //    Responce.EnsureSuccessStatusCode();
-        //    return await Deserialize<T>(Responce).ConfigureAwait(false);
-        //}
-
 #if NETCOREAPP
 
         protected Task Patch(string path, object data) => Request(path, data, HttpMethod.Patch);
@@ -62,14 +53,32 @@ namespace Lanyard
 
         protected Task Request(string path, object data, HttpMethod method) => Request<object>(path, data, method);
 
+        protected async Task<T> Request<T>(string path, HttpContent content, HttpMethod method)
+        {
+            using var Request = new HttpRequestMessage(method, path);
+            if (content is not null) { Request.Content = content; }
+
+            using var Responce = await Client.SendAsync(Request).ConfigureAwait(false);
+            Responce.EnsureSuccessStatusCode();
+            if (Responce.StatusCode == System.Net.HttpStatusCode.NoContent) { return default; }
+            return await Deserialize<T>(Responce).ConfigureAwait(false);
+        }
+
         protected async Task<T> Request<T>(string path, object data, HttpMethod method)
         {
             using var Request = new HttpRequestMessage(method, path);
-            if (data is not null)
+            Request.Content = data switch
             {
-                var SC = Serialize(data);
-                Request.Content = SC;
-            }
+                string str => new StringContent(str),
+                not null => Serialize(data),
+                null => null
+            };
+
+            //if (data is not null)
+            //{
+            //    Request.Content = new Serialize(data);
+            //    Request.Content = new StringContent(data);
+            //}
             using var Responce = await Client.SendAsync(Request).ConfigureAwait(false);
             Responce.EnsureSuccessStatusCode();
             if (Responce.StatusCode == System.Net.HttpStatusCode.NoContent) { return default; }
@@ -85,13 +94,13 @@ namespace Lanyard
             return JsonConvert.DeserializeObject<T>(Response);
         }
 
-        private HttpContent Serialize(object request)
+        private HttpContent Serialize(object data)
         {
             MemoryStream MS = new();
             using (var SW = new StreamWriter(MS, new UTF8Encoding(false), 1024, true))
             using (var JTW = new JsonTextWriter(SW) { Formatting = Formatting.None })
             {
-                Serializer.Serialize(JTW, request);
+                Serializer.Serialize(JTW, data);
                 JTW.Flush();
             }
             MS.Seek(0, SeekOrigin.Begin);
