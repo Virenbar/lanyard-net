@@ -4,7 +4,7 @@ on:
 jobs:
   build:
     name: Build
-    uses: ./.github/workflows/build-artifact.yml@master
+    uses: ./.github/workflows/build-artifact.yml
 
   publish:
     name: Publish

@@ -52,5 +52,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Lanyard
-          path: "**\*.nupkg"
+          path: '**\*.nupkg'
           if-no-files-found: error
