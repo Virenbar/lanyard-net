@@ -7,12 +7,10 @@ namespace Lanyard
     /// </summary>
     public class LanyardClient : BaseClient
     {
-        protected const string EndPoint = "https://api.lanyard.rest/v1/";
-
         /// <summary>
         /// Creates new lanyard client with default endpoint
         /// </summary>
-        public LanyardClient() : this(EndPoint) { }
+        public LanyardClient() : this(Constants.EndPoint) { }
 
         /// <summary>
         /// Creates new lanyard client with custom endpoint
@@ -21,10 +19,10 @@ namespace Lanyard
         public LanyardClient(string endpoint) : base(endpoint) { }
 
         /// <summary>
-        /// Get data for user
+        /// Get presence for user
         /// </summary>
         /// <param name="userID">Discord user ID</param>
         /// <returns></returns>
-        public Task<UserResponce> User(string userID) => Get<UserResponce>($"users/{userID}");
+        public Task<PresenceResponce> GetPresence(string userID) => Get<PresenceResponce>($"users/{userID}");
     }
 }

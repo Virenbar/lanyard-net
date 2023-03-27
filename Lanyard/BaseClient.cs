@@ -11,10 +11,6 @@ namespace Lanyard
     {
         protected HttpClient Client;
         protected JsonSerializer Serializer;
-        //static BaseClient()
-        //{
-        //    ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls13 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
-        //}
 
         protected BaseClient(string EndPoint) : this(new Uri(EndPoint)) { }
 
@@ -33,38 +29,31 @@ namespace Lanyard
 
         #region Methods
 
-        protected Task Delete(string path) => Request(path, null, HttpMethod.Delete);
+        protected Task<object> Delete(string path) => Fetch<object>(path, null, HttpMethod.Delete);
 
-        protected Task<T> Delete<T>(string path) => Request<T>(path, null, HttpMethod.Delete);
+        protected Task<T> Delete<T>(string path) => Fetch<T>(path, null, HttpMethod.Delete);
 
-        protected Task<T> Get<T>(string path) => Request<T>(path, null, HttpMethod.Get);
+        protected Task<object> Get(string path) => Fetch<object>(path, null, HttpMethod.Get);
+
+        protected Task<T> Get<T>(string path) => Fetch<T>(path, null, HttpMethod.Get);
 
 #if NETCOREAPP
 
-        protected Task Patch(string path, object data) => Request(path, data, HttpMethod.Patch);
+        protected Task<object> Patch(string path, object data) => Fetch<object>(path, data, HttpMethod.Patch);
 
-        protected Task<T> Patch<T>(string path, object data) => Request<T>(path, data, HttpMethod.Patch);
+        protected Task<T> Patch<T>(string path, object data) => Fetch<T>(path, data, HttpMethod.Patch);
 
 #endif
 
-        protected Task Put(string path, object data) => Request(path, data, HttpMethod.Put);
+        protected Task<object> Put(string path, object data) => Fetch<object>(path, data, HttpMethod.Put);
+
+        protected Task<T> Put<T>(string path, object data) => Fetch<T>(path, data, HttpMethod.Put);
 
         #endregion Methods
 
-        protected Task Request(string path, object data, HttpMethod method) => Request<object>(path, data, method);
+        protected Task<object> Fetch(string path, object data, HttpMethod method) => Fetch<object>(path, data, method);
 
-        protected async Task<T> Request<T>(string path, HttpContent content, HttpMethod method)
-        {
-            using var Request = new HttpRequestMessage(method, path);
-            if (content is not null) { Request.Content = content; }
-
-            using var Responce = await Client.SendAsync(Request).ConfigureAwait(false);
-            Responce.EnsureSuccessStatusCode();
-            if (Responce.StatusCode == System.Net.HttpStatusCode.NoContent) { return default; }
-            return await Deserialize<T>(Responce).ConfigureAwait(false);
-        }
-
-        protected async Task<T> Request<T>(string path, object data, HttpMethod method)
+        protected async Task<T> Fetch<T>(string path, object data, HttpMethod method)
         {
             using var Request = new HttpRequestMessage(method, path);
             Request.Content = data switch
@@ -73,12 +62,6 @@ namespace Lanyard
                 not null => Serialize(data),
                 null => null
             };
-
-            //if (data is not null)
-            //{
-            //    Request.Content = new Serialize(data);
-            //    Request.Content = new StringContent(data);
-            //}
             using var Responce = await Client.SendAsync(Request).ConfigureAwait(false);
             Responce.EnsureSuccessStatusCode();
             if (Responce.StatusCode == System.Net.HttpStatusCode.NoContent) { return default; }

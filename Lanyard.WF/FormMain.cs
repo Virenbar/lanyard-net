@@ -23,7 +23,7 @@ namespace Lanyard.WF
         private async void B_Patch_Click(object sender, EventArgs e)
         {
             using var KV = new KVClient(Settings.Default.UserID, Settings.Default.APIKey);
-            var D = new Dictionary<string, string>() {
+            var D = new Dictionary<string, string> {
                 { TB_KVKey.Text, TB_KVValue.Text }
             };
             await KV.SetKeys(D);
@@ -37,8 +37,9 @@ namespace Lanyard.WF
 
         private async void B_User_Click(object sender, EventArgs e)
         {
-            var Responce = await Client.User(Settings.Default.UserID);
-            PG_Data.SelectedObject = Responce.Data;
+            var Response = await Client.GetPresence(Settings.Default.UserID);
+            var Presence = Response.Data;
+            PG_Data.SelectedObject = Presence;
         }
 
         private void FormMain_Load(object sender, EventArgs e)

@@ -2,7 +2,7 @@
 
 namespace Lanyard.Models
 {
-    public class UserResponce : Responce
+    public class PresenceResponce : Responce
     {
         [JsonProperty("data")]
         public Presence Data { get; set; }

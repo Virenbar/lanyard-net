@@ -1,8 +1,48 @@
 # Lanyard.NET [![Build artifact][build-src]][build-href] [![Codacy Badge][codacy-src]][codacy-href]
 
-[![Nuget][nuget-src]][nuget-href]
+[![NuGet][nuget-src]][nuget-href]
 
+.NET library for [Lanyard API](https://github.com/Phineas/lanyard)
 
+## Usage
+
+* `<UserID>` - Discord user ID
+* `<APIKey>` - Lanyard KV API key
+
+### LanyardClient
+
+Class for getting user presence
+
+```C#
+using var Client = new LanyardClient();
+var Response = await Client.GetPresence(<UserID>);
+var Presence = Response.Data;
+```
+
+### KVClient
+
+Class for managing KV store
+
+```C#
+using var KV = new KVClient(<UserID>, <APIKey>);
+// Set key
+await KV.SetKey(<Key>, <Value>);
+// Set multiple keys
+var Keys = new Dictionary<string, string> {
+    { <Key>, <Value> },
+    { <Key>, <Value> }
+};
+await KV.SetKeys(Keys);
+// Delete key
+await KV.DeleteKey(<Key>);
+// Get presence
+var Response = await Client.GetPresence();
+var Presence = Response.Data;
+```
+
+## Lanyard.WF
+
+WinForms application for testing library
 
 <!-- Badges -->
 [build-src]: https://img.shields.io/github/actions/workflow/status/Virenbar/lanyard-net/build-artifact.yml?label=Build&logo=github
