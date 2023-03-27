@@ -1,10 +1,10 @@
 ﻿namespace Lanyard
 {
-    public class Constants
+    public static class Constants
     {
         /// <summary>
         /// Default Lanyard EndPoint
         /// </summary>
-        public const string EndPoint = "https://api.lanyard.rest/v1/";
+        public static string EndPoint => "https://api.lanyard.rest/v1/";
     }
 }
