@@ -9,10 +9,10 @@ namespace Lanyard.Models
     {
         [JsonProperty("start")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
-        public DateTime Start { get; set; }
+        public DateTime Start { get; internal set; }
 
         [JsonProperty("end")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
-        public DateTime? End { get; set; }
+        public DateTime? End { get; internal set; }
     }
 }

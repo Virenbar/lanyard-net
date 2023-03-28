@@ -1,3 +1,4 @@
+using Lanyard.Extensions;
 using Lanyard.WF.Properties;
 
 namespace Lanyard.WF
@@ -39,6 +40,9 @@ namespace Lanyard.WF
         {
             var Presence = await Client.GetPresence(Settings.Default.UserID);
             PG_Data.SelectedObject = Presence;
+
+            var Activity = Presence.Activity();
+            var Avatar = Presence.AvatarURL();
         }
 
         private void FormMain_Load(object sender, EventArgs e)

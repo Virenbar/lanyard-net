@@ -8,14 +8,14 @@ namespace Lanyard.Models
         public ResponceError Error { get; set; }
 
         [JsonProperty("success")]
-        public bool Success { get; set; }
+        public bool Success { get; internal set; }
     }
     public class ResponceError
     {
         [JsonProperty("code")]
-        public string Code { get; set; }
+        public string Code { get; internal set; }
 
         [JsonProperty("message")]
-        public string Message { get; set; }
+        public string Message { get; internal set; }
     }
 }

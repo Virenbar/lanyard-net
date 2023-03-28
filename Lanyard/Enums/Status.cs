@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Lanyard.Models
+namespace Lanyard
 {
     /// <summary>
     /// User status

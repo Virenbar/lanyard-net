@@ -8,18 +8,18 @@ namespace Lanyard.Models
     public class DiscordUser
     {
         [JsonProperty("avatar")]
-        public string Avatar { get; set; }
+        public string Avatar { get; internal set; }
 
         [JsonProperty("discriminator")]
-        public string Discriminator { get; set; }
+        public string Discriminator { get; internal set; }
 
         [JsonProperty("id")]
-        public string ID { get; set; }
+        public string ID { get; internal set; }
 
         [JsonProperty("public_flags")]
-        public long PublicFlags { get; set; }
+        public UserFlags PublicFlags { get; internal set; }
 
         [JsonProperty("username")]
-        public string Username { get; set; }
+        public string Username { get; internal set; }
     }
 }
