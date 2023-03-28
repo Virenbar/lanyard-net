@@ -1,4 +1,5 @@
-﻿using Lanyard.Models;
+﻿using Lanyard.Exceptions;
+using Lanyard.Models;
 
 namespace Lanyard
 {
@@ -29,9 +30,16 @@ namespace Lanyard
         public KVClient(string userID, string APIKey) : this(userID, APIKey, Constants.EndPoint) { }
 
         /// <summary>
-        /// Get presence for user
+        /// Get presence
         /// </summary>
-        public Task<PresenceResponce> GetPresence() => Get<PresenceResponce>($"users/{UserID}");
+        /// <returns><see cref="Presence"/></returns>
+        /// <exception cref="LanyardException"/>
+        public async Task<Presence> GetPresence()
+        {
+            var Responce = await Get<PresenceResponce>($"users/{UserID}");
+            if (!Responce.Success) { throw new LanyardException(Responce.Error); }
+            return Responce.Data;
+        }
 
         #region KV
 
@@ -39,7 +47,6 @@ namespace Lanyard
         /// Delete key from KV
         /// </summary>
         /// <param name="key"></param>
-        /// <returns></returns>
         public Task DeleteKey(string key) => Delete($"users/{UserID}/kv/{key}");
 
         /// <summary>
@@ -47,7 +54,6 @@ namespace Lanyard
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
-        /// <returns></returns>
         public Task SetKey(string key, string value) => Put($"users/{UserID}/kv/{key}", value);
 
 #if NETCOREAPP
@@ -56,7 +62,6 @@ namespace Lanyard
         /// Set multiple keys in KV
         /// </summary>
         /// <param name="values"></param>
-        /// <returns></returns>
         public Task SetKeys(IDictionary<string, string> values) => Patch($"users/{UserID}/kv/", values);
 
 #endif

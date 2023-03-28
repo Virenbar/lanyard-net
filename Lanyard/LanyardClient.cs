@@ -1,4 +1,5 @@
-﻿using Lanyard.Models;
+﻿using Lanyard.Exceptions;
+using Lanyard.Models;
 
 namespace Lanyard
 {
@@ -22,7 +23,13 @@ namespace Lanyard
         /// Get presence for user
         /// </summary>
         /// <param name="userID">Discord user ID</param>
-        /// <returns></returns>
-        public Task<PresenceResponce> GetPresence(string userID) => Get<PresenceResponce>($"users/{userID}");
+        /// <returns><see cref="Presence"/></returns>
+        /// <exception cref="LanyardException"/>
+        public async Task<Presence> GetPresence(string userID)
+        {
+            var Responce = await Get<PresenceResponce>($"users/{userID}");
+            if (!Responce.Success) { throw new LanyardException(Responce.Error); }
+            return Responce.Data;
+        }
     }
 }

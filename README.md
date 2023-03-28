@@ -15,8 +15,7 @@ Class for getting user presence
 
 ```C#
 using var Client = new LanyardClient();
-var Response = await Client.GetPresence(<UserID>);
-var Presence = Response.Data;
+var Presence = await Client.GetPresence(<UserID>);
 ```
 
 ### KVClient
@@ -36,8 +35,7 @@ await KV.SetKeys(Keys);
 // Delete key
 await KV.DeleteKey(<Key>);
 // Get presence
-var Response = await Client.GetPresence();
-var Presence = Response.Data;
+var Presence = await KV.GetPresence();
 ```
 
 ## Lanyard.WF

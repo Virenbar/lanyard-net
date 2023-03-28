@@ -37,8 +37,7 @@ namespace Lanyard.WF
 
         private async void B_User_Click(object sender, EventArgs e)
         {
-            var Response = await Client.GetPresence(Settings.Default.UserID);
-            var Presence = Response.Data;
+            var Presence = await Client.GetPresence(Settings.Default.UserID);
             PG_Data.SelectedObject = Presence;
         }
 
