@@ -26,6 +26,6 @@ namespace Lanyard.Models
         [JsonProperty("track_id")]
         public string TrackID { get; internal set; }
 
-        public override string ToString() => $"{string.Join(", ", Artist)} - {Song} ({this.Duration()})";
+        public override string ToString() => $"{Artist} - {Song} ({this.Duration():HH:mm:ss})";
     }
 }

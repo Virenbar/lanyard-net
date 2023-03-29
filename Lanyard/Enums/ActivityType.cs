@@ -2,6 +2,8 @@
 {
     /// <summary>
     /// Specifies a Discord user's activity type
+    /// <br/>
+    /// <see href="https://discord.com/developers/docs/game-sdk/activities#data-models-activitytype-enum">Discord API</see>
     /// </summary>
     public enum ActivityType
     {

@@ -1,84 +1,96 @@
 ﻿namespace Lanyard
 {
     /// <summary>
-    /// Discord user flags
+    /// Discord User Flags
+    /// <br/>
+    /// <see href="https://discord.com/developers/docs/resources/user#user-object-user-flags">Discord API</see>
     /// </summary>
     [Flags]
     public enum UserFlags
     {
         /// <summary>
-        /// Discord Employee
+        /// Default value for flags, when none are given to an account.
         /// </summary>
-        STAFF = 1 << 0,
+        None = 0,
 
         /// <summary>
-        /// Partnered Server Owner
+        /// Flag given to users who are a Discord employee
         /// </summary>
-        PARTNER = 1 << 1,
+        Staff = 1 << 0,
 
         /// <summary>
-        /// HypeSquad Events Member
+        /// Flag given to users who are owners of a partnered Discord server
         /// </summary>
-        HYPESQUAD = 1 << 2,
+        Partner = 1 << 1,
 
         /// <summary>
-        /// Bug Hunter Level 1
+        /// Flag given to users in HypeSquad events
         /// </summary>
-        BUG_HUNTER_LEVEL_1 = 1 << 3,
+        HypeSquadEvents = 1 << 2,
 
         /// <summary>
-        /// House Bravery Member
+        /// Flag given to users who have participated in the bug report program and are level 1
         /// </summary>
-        HYPESQUAD_ONLINE_HOUSE_1 = 1 << 6,
+        BugHunterLevel1 = 1 << 3,
 
         /// <summary>
-        /// House Brilliance Member
+        /// Flag given to users who are in the HypeSquad House of Bravery
         /// </summary>
-        HYPESQUAD_ONLINE_HOUSE_2 = 1 << 7,
+        HypeSquadBravery = 1 << 6,
 
         /// <summary>
-        /// House Balance Member
+        /// Flag given to users who are in the HypeSquad House of Brilliance
         /// </summary>
-        HYPESQUAD_ONLINE_HOUSE_3 = 1 << 8,
+        HypeSquadBrilliance = 1 << 7,
 
         /// <summary>
-        /// Early Nitro Supporter
+        /// Flag given to users who are in the HypeSquad House of Balance
         /// </summary>
-        PREMIUM_EARLY_SUPPORTER = 1 << 9,
+        HypeSquadBalance = 1 << 8,
 
         /// <summary>
-        /// User is a team
+        /// Flag given to users who subscribed to Nitro before games were added
         /// </summary>
-        TEAM_PSEUDO_USER = 1 << 10,
+        EarlySupporter = 1 << 9,
 
         /// <summary>
-        ///  Bug Hunter Level 2
+        /// Flag given to users who are part of a team
         /// </summary>
-        BUG_HUNTER_LEVEL_2 = 1 << 14,
+        TeamUser = 1 << 10,
 
         /// <summary>
-        /// Verified Bot
+        /// Flag given to users who represent Discord (System)
         /// </summary>
-        VERIFIED_BOT = 1 << 16,
+        System = 1 << 12,
 
         /// <summary>
-        /// Early Verified Bot Developer
+        /// Flag given to users who have participated in the bug report program and are level 2
         /// </summary>
-        VERIFIED_DEVELOPER = 1 << 17,
+        BugHunterLevel2 = 1 << 14,
 
         /// <summary>
-        /// Moderator Programs Alumni
+        /// Flag given to users who are verified bots
         /// </summary>
-        CERTIFIED_MODERATOR = 1 << 18,
+        VerifiedBot = 1 << 16,
 
         /// <summary>
-        /// Bot uses only HTTP interactions and is shown in the online member list
+        /// Flag given to users that developed bots and early verified their accounts
         /// </summary>
-        BOT_HTTP_INTERACTIONS = 1 << 19,
+        EarlyVerifiedBotDeveloper = 1 << 17,
 
         /// <summary>
-        /// User is an Active Developer
+        /// Flag given to users that are discord certified moderators who has give discord's exam
         /// </summary>
-        ACTIVE_DEVELOPER = 1 << 22
+        DiscordCertifiedModerator = 1 << 18,
+
+        /// <summary>
+        /// Flag given to bots that use only outgoing webhooks, exclusively
+        /// </summary>
+        BotHTTPInteractions = 1 << 19,
+
+        /// <summary>
+        /// Flag given to users that are active developers
+        /// </summary>
+        ActiveDeveloper = 1 << 22
     }
 }

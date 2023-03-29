@@ -21,5 +21,7 @@ namespace Lanyard.Models
 
         [JsonProperty("username")]
         public string Username { get; internal set; }
+
+        public override string ToString() => $"{Username}#{Discriminator} ({ID})";
     }
 }

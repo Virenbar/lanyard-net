@@ -2,6 +2,9 @@
 
 namespace Lanyard.Extensions
 {
+    /// <summary>
+    /// Extensions for <see cref="Presence"/>
+    /// </summary>
     public static class PresenceExtensions
     {
         public static Activity Activity(this Presence presence) => presence.Activities.FirstOrDefault();

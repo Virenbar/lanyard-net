@@ -10,11 +10,9 @@ namespace Lanyard.Models
         [JsonProperty("id")]
         public string ID { get; internal set; }
 
-#if DEBUG
-
         [JsonProperty("size")]
-        public ActivityPartySize Size { get; set; }
+        public int[] Size { get; internal set; }
 
-#endif
+        public override string ToString() => $"{ID}{(Size is null ? "": $"({Size[0]}/{Size[1]})")}";
     }
 }

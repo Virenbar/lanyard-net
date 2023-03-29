@@ -19,8 +19,11 @@ namespace Lanyard.Models
         [JsonProperty("details")]
         public string Details { get; internal set; }
 
+        [JsonProperty("emoji")]
+        public ActivityEmoji Emoji { get; internal set; }
+
         [JsonProperty("flags")]
-        public long? Flags { get; internal set; }
+        public ActivityFlags? Flags { get; internal set; }
 
         [JsonProperty("id")]
         public string ID { get; internal set; }
@@ -45,5 +48,7 @@ namespace Lanyard.Models
 
         [JsonProperty("type")]
         public ActivityType Type { get; internal set; }
+
+        public override string ToString() => $"{Name} ({ID})";
     }
 }

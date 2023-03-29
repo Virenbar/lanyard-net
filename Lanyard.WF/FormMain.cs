@@ -41,8 +41,8 @@ namespace Lanyard.WF
             var Presence = await Client.GetPresence(Settings.Default.UserID);
             PG_Data.SelectedObject = Presence;
 
-            var Activity = Presence.Activity();
-            var Avatar = Presence.AvatarURL();
+            Console.WriteLine(Presence.AvatarURL());
+            Console.WriteLine(Presence.Activity()?.LargeImageURL());
         }
 
         private void FormMain_Load(object sender, EventArgs e)
