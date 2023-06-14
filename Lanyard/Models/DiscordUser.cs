@@ -13,6 +13,9 @@ namespace Lanyard.Models
         [JsonProperty("discriminator")]
         public string Discriminator { get; internal set; }
 
+        [JsonProperty("global_name")]
+        public string GlobalName { get; internal set; }
+
         [JsonProperty("id")]
         public string ID { get; internal set; }
 
@@ -22,6 +25,6 @@ namespace Lanyard.Models
         [JsonProperty("username")]
         public string Username { get; internal set; }
 
-        public override string ToString() => $"{Username}#{Discriminator} ({ID})";
+        public override string ToString() => Discriminator == "0" ? Username : $"{Username}#{Discriminator}";
     }
 }

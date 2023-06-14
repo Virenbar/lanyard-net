@@ -7,20 +7,25 @@ namespace Lanyard.Extensions
     /// </summary>
     public static class PresenceExtensions
     {
+        /// <summary>
+        /// First activity
+        /// </summary>
         public static Activity Activity(this Presence presence) => presence.Activities.FirstOrDefault();
 
-        public static string AvatarURL(this Presence presence) => AvatarURL(presence, FileType.png);
+        /// <summary>
+        /// Avatar URL
+        /// </summary>
+        public static string AvatarURL(this Presence presence) => presence.DiscordUser.AvatarURL();
 
-        public static string AvatarURL(this Presence presence, FileType type)
-        {
-            return $"{Constants.DiscordCDN}{presence.DiscordUser.ID}/{presence.DiscordUser.Avatar}.{type}";
-        }
+        /// <summary>
+        /// Avatar URL
+        /// </summary>
+        /// <param name="presence"></param>
+        /// <param name="size">Avatar size</param>
+        public static string AvatarURL(this Presence presence, int size) => presence.DiscordUser.AvatarURL(size);
 
-        public static string UserIconURL(this Presence presence) => UserIconURL(presence, FileType.png);
+        public static string UserIconURL(this Presence presence) => presence.DiscordUser.UserIconURL();
 
-        public static string UserIconURL(this Presence presence, FileType type)
-        {
-            return $"{Constants.QuickLinks}{presence.DiscordUser.ID}.{type}";
-        }
+        public static string UserIconURL(this Presence presence, FileType type) => presence.DiscordUser.UserIconURL(type);
     }
 }
