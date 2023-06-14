@@ -46,11 +46,11 @@ jobs:
           dotnet build -c Release
 
       - name: Pack NuGet
-        run: dotnet pack .\Lanyard\Lanyard.csproj -c Release /p:Version=$env:VERSION --include-symbols
+        run: dotnet pack .\Lanyard\Lanyard.csproj -c Release /p:Version=$env:VERSION
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: Lanyard
-          path: '**\*.nupkg'
+          path: '**\*.*nupkg'
           if-no-files-found: error
