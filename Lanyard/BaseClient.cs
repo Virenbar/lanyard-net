@@ -2,6 +2,10 @@
 using System.Net.Http.Headers;
 using System.Text;
 
+#if !NETCOREAPP
+using System.Net.Http;
+#endif
+
 namespace Lanyard
 {
     /// <summary>

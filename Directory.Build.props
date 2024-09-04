@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<Authors>Virenbar</Authors>
-		<Copyright>Copyright © Virenbar 2023</Copyright>
+		<Copyright>Copyright © Virenbar 2024</Copyright>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -17,7 +17,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
 	</ItemGroup>
 
 </Project>
